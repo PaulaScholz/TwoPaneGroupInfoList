@@ -96,8 +96,8 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Contact.cs" />
-    <Compile Include="ContactEditForm.xaml.cs">
-      <DependentUpon>ContactEditForm.xaml</DependentUpon>
+    <Compile Include="DisplayView.xaml.cs">
+      <DependentUpon>DisplayView.xaml</DependentUpon>
     </Compile>
     <Compile Include="GroupedListView.xaml.cs">
       <DependentUpon>GroupedListView.xaml</DependentUpon>
@@ -131,7 +131,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="ContactEditForm.xaml">
+    <Page Include="DisplayView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

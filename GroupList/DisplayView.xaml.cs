@@ -15,15 +15,15 @@ using GroupList.Model;
 
 namespace GroupList
 {
-    public sealed partial class ContactEditForm : UserControl
+    public sealed partial class DisplayView : UserControl
     {
 #pragma warning disable CA2211 // Non-constant fields should not be visible
-        public static ContactEditForm Current;
+        public static DisplayView Current;
 #pragma warning restore CA2211 // Non-constant fields should not be visible
 
         private Contact CurrentContact = null;
 
-        public ContactEditForm()
+        public DisplayView()
         {
             this.InitializeComponent();
 

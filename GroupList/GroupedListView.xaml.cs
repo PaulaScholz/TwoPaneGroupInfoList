@@ -39,7 +39,7 @@ namespace GroupList.GroupList
 
             MainPage.Current.SetMainViewShared();
 
-            ContactEditForm.Current.SetCurrentContact(selectedContact);
+            DisplayView.Current.SetCurrentContact(selectedContact);
 
         }
 

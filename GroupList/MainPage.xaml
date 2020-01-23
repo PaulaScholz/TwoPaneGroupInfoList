@@ -22,7 +22,7 @@
                 <local:GroupedListView />
             </TwoPaneView.Pane1>
             <TwoPaneView.Pane2>
-                <contact:ContactEditForm />
+                <contact:DisplayView />
             </TwoPaneView.Pane2>
         </TwoPaneView>
     </Grid>

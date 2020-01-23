@@ -1,5 +1,5 @@
 ﻿<UserControl
-    x:Class="GroupList.ContactEditForm"
+    x:Class="GroupList.DisplayView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:GroupList"
@@ -77,10 +77,14 @@
                                      MaxLength="1000"
                                      TextWrapping="Wrap"
                                      Height="120" />
+                    
+                    <!-- 
                     <MediaPlayerElement x:Name="ContactMediaPlayer"
                                         Source="ms-appx:///Assets/PdfReader.mp4" 
                                         AreTransportControlsEnabled="True" 
                                         Margin="0,0,0,16" />
+                    
+                    -->
                 </StackPanel>
             </ScrollViewer>
             <Grid Grid.Row="1" Margin="24,4,24,24">
