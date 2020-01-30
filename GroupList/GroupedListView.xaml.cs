@@ -11,9 +11,11 @@ namespace GroupList.GroupList
 {
     public sealed partial class GroupedListView : UserControl
     {
-        private Contact selectedContact = null;
+        public Contact SelectedContact { get; set; }
 
+#pragma warning disable CA2211 // Non-constant fields should not be visible
         public static GroupedListView Current = null;
+#pragma warning restore CA2211 // Non-constant fields should not be visible
 
         public GroupedListView()
         {
@@ -26,21 +28,16 @@ namespace GroupList.GroupList
             // containing Contacts generated randomly.
             ContactsCVS.Source = Contact.GetContactsGroupedAllAlpha(200);
 
-            // the first item in the list is selected by default, deselect it on startup
-            ContactsCVS.View.MoveCurrentTo(null);
-
             ContactsCVS.View.CurrentChanged += DirectoryView_CurrentChanged;
         }
 
         private void DirectoryView_CurrentChanged(object sender, object e)
         {
+            SelectedContact = ContactsCVS.View.CurrentItem as Contact;
 
-            selectedContact = ContactsCVS.View.CurrentItem as Contact;
+            DisplayView.Current?.SetCurrentContact(SelectedContact);
 
-            MainPage.Current.SetMainViewShared();
-
-            DisplayView.Current.SetCurrentContact(selectedContact);
-
+            MainPage.Current.SetDisplayViewDominant();
         }
 
         /// <summary>

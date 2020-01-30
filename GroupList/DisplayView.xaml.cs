@@ -21,7 +21,7 @@ namespace GroupList
         public static DisplayView Current;
 #pragma warning restore CA2211 // Non-constant fields should not be visible
 
-        private Contact CurrentContact = null;
+        public Contact CurrentContact { get; set; }
 
         public DisplayView()
         {
@@ -38,7 +38,7 @@ namespace GroupList
             EditCurrentContact();
         }
 
-        private void EditCurrentContact()
+        public void EditCurrentContact()
         {
             ResetContactForm();
 

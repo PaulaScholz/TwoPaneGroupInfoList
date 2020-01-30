@@ -118,7 +118,8 @@
                 <GridView ItemsSource="{x:Bind ContactsCVS.View}"
                           ItemTemplate="{StaticResource ContactListViewTemplate}"
                           SelectionMode="Single"
-                          ShowsScrollingPlaceholders="True">
+                          ShowsScrollingPlaceholders="True"
+                          x:Name="ContactItemsGridView">
 
                     <!--  This the the style for the Group header, which is bound to the Key property of the GroupInfoList 
                           object. A GroupInfoList is derived from List<T> and has a Key property, the value of which forms the 
