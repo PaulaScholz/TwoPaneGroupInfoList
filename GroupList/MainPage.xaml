@@ -21,7 +21,7 @@
                  Pane1Length="1*"
                  Pane2Length="0*"
                  PanePriority="Pane1"
-                 MinTallModeHeight="1000"
+                 MinTallModeHeight="1200"
                  MinWideModeWidth="500"
                  TallModeConfiguration="TopBottom"
                  WideModeConfiguration="LeftRight">
