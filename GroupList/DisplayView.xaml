@@ -9,8 +9,6 @@
     d:DesignHeight="1000"
     d:DesignWidth="400">
 
-
-
         <!-- This is the edit form  -->
         <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" x:Name="ContactFormDialog" Visibility="Visible">
             <Rectangle
@@ -78,7 +76,8 @@
                                      TextWrapping="Wrap"
                                      Height="120" />
                     
-                    <!-- 
+                    <!-- You can uncomment out this MediaPlayerElement in the future to experiment 
+                         with CompactOverlay mode.  
                     <MediaPlayerElement x:Name="ContactMediaPlayer"
                                         Source="ms-appx:///Assets/PdfReader.mp4" 
                                         AreTransportControlsEnabled="True" 

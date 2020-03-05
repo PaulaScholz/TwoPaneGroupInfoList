@@ -5,6 +5,8 @@
     xmlns:local="using:GroupList"
     RequestedTheme="Dark">
 
+    <!-- To use WinUI controls rather than SDK controls, you have to place a XamlControlsResources
+         reference in your Resource Dictionary.  -->
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>

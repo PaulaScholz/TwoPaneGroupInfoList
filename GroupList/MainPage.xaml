@@ -6,6 +6,7 @@
     xmlns:contact="using:GroupList"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:Microsoft.UI.Xaml.Controls"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
@@ -14,23 +15,28 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-
-        <Button Style="{StaticResource NavigationBackButtonNormalStyle}" x:Name="BackButton" Click="BackButton_Click" IsEnabled="False" Visibility="{x:Bind ApplicationNotSpanned, Mode=OneWay}"/>
-        <TwoPaneView x:Name="MainView"
+        
+        <!-- This is the BackButton -->
+        <Button Style="{StaticResource NavigationBackButtonNormalStyle}" x:Name="BackButton" Click="BackButton_Click" 
+                IsEnabled="False" Visibility="{x:Bind ApplicationNotSpanned, Mode=OneWay}"/>
+        
+        <!-- TwoPaneView allows screen spanning and display of panes under software control.  Here, we use UserControls
+              to host the actual content of the panes.    -->
+        <controls:TwoPaneView x:Name="MainView"
                  Grid.Row="1"
                  Pane1Length="1*"
                  Pane2Length="0*"
                  PanePriority="Pane1"
-                 MinTallModeHeight="1200"
-                 MinWideModeWidth="500"
+                 MinTallModeHeight="641"
+                 MinWideModeWidth="641"
                  TallModeConfiguration="TopBottom"
                  WideModeConfiguration="LeftRight">
-            <TwoPaneView.Pane1>
+            <controls:TwoPaneView.Pane1>
                 <local:GroupedListView />
-            </TwoPaneView.Pane1>
-            <TwoPaneView.Pane2>
+            </controls:TwoPaneView.Pane1>
+            <controls:TwoPaneView.Pane2>
                 <contact:DisplayView />
-            </TwoPaneView.Pane2>
-        </TwoPaneView>
+            </controls:TwoPaneView.Pane2>
+        </controls:TwoPaneView>
     </Grid>
 </Page>

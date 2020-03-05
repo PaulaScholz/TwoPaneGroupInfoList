@@ -1,59 +1,49 @@
-﻿using System;
-using System.Collections.Generic;
+﻿//***********************************************************************
+//
+// Copyright (c) 2020 Microsoft Corporation. All rights reserved.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+// THE SOFTWARE.
+//
+//**********************************************************************​
 using System.ComponentModel;
-using System.IO;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
 
 using System.Diagnostics;
 using Windows.UI.ViewManagement;
 using GroupList.GroupList;
-using Windows.System;
-using System.Text.RegularExpressions;
+using MUXC = Microsoft.UI.Xaml.Controls;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
 namespace GroupList
 {
-
-
+    /// <summary>
+    /// The DominantView reflects which Pane of the TwoPaneView has 
+    /// priority of display.  Main is Pane1, Display is Pane2 (Contact edit),
+    /// and Shared reflects spanned status acrosss both screens.
+    /// </summary>
     public enum DominantView { Main, Display, Shared}
 
     /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
+    /// No view models on the simple MainPage.  Add data is displayed
+    /// in UserControls.
     /// </summary>
     public sealed partial class MainPage : Page, INotifyPropertyChanged
     {
-        /// <summary>
-        /// The beginning width of TwoPaneView element, MainView
-        /// </summary>
-        private double BeginningWidth { get; set; }
-
-        /// <summary>
-        /// The beginning height of TwoPaneView element, MainView
-        /// </summary>
-        private double BeginningHeight { get; set; }
-
-        /// <summary>
-        /// The current ApplicationViewOrientation of the MainView (Portrait or Landscape)
-        /// </summary>
-        public ApplicationViewOrientation CurrentOrientation { get; set; }
 
         private bool _applicationIsSpanned = false;
 
         /// <summary>
-        /// True if the application is spanned across two screens.  We're going
-        /// to bind this in the UI, so implement property change notification.
+        /// True if the application is spanned across two screens.  We may bind 
+        /// this in the UI in future, so implement property change notification.
         /// </summary>
         public bool ApplicationIsSpanned 
         { 
@@ -73,14 +63,10 @@ namespace GroupList
         public static MainPage Current = null;
 #pragma warning restore CA2211 // Non-constant fields should not be visible
 
-        public GridLength Pane1DominantWidth { get; set; }
-        public GridLength Pane1SharedWidth { get; set; }
-        public GridLength Pane2DominantWidth { get; set; }
-        public GridLength Pane2SharedWidth { get; set; }
+        private GridLength OneStarGridLength = new GridLength(1, GridUnitType.Star);
+        private GridLength ZeroStarGridLength = new GridLength(0, GridUnitType.Star);
 
         public DominantView CurrentDominantView { get; set; }
-
-        public bool OrientationChanged { get; set; }
 
         private bool applicationWasSpanned = false;
 
@@ -88,47 +74,72 @@ namespace GroupList
         {
             this.InitializeComponent();
 
-            Pane1DominantWidth = new GridLength(1, GridUnitType.Star);
-            Pane1SharedWidth = new GridLength(0.5, GridUnitType.Star);
-            Pane2DominantWidth = new GridLength(0, GridUnitType.Star);
-            Pane2SharedWidth = new GridLength(0.5, GridUnitType.Star);
-
-            Loaded += MainPage_Loaded;
-
             SizeChanged += MainPage_SizeChanged;
+
+            MainView.ModeChanged += MainView_ModeChanged;
 
             Current = this;
         }
 
-        private void MainPage_Loaded(object sender, RoutedEventArgs e)
+        private void MainView_ModeChanged(MUXC.TwoPaneView sender, object args)
         {
-            // Get the initial size of the TwoPaneView element
-            BeginningWidth = MainView.ActualWidth;
-            BeginningHeight = MainView.ActualHeight;
+            switch (sender.Mode)
+            {
+                case MUXC.TwoPaneViewMode.SinglePane:
+                    //
+                    Debug.WriteLine("MainView_ModeChanged TwoPaneView Mode is SinglePane");
 
+                    break;
+                case MUXC.TwoPaneViewMode.Tall:
+                    //
+                    Debug.WriteLine("MainView_ModeChanged TwoPaneView Mode is Tall");
+                    break;
+                case MUXC.TwoPaneViewMode.Wide:
+                    //
+                    Debug.WriteLine("MainView_ModeChanged TwoPaneView Mode is Wide");
+                    break;
+                default:
+                    //
+                    break;
+            }
         }
 
         private void MainPage_SizeChanged(object sender, SizeChangedEventArgs e)
         {           
-            ApplicationViewOrientation oldOrientation = CurrentOrientation;            
+           
+            switch(ApplicationView.GetForCurrentView().ViewMode)
+            {
+                case ApplicationViewMode.Spanning:
+                    //
+                    Debug.WriteLine("MainPage_SizeChanged View Mode is ApplicationViewMode.Spanning");
+                    ApplicationIsSpanned = !ApplicationIsSpanned;
+                    break;
+                case ApplicationViewMode.Default:
+                    //
+                    Debug.WriteLine("MainPage_SizeChanged View Mode is ApplicationViewMode.Default");
+                    ApplicationIsSpanned = false;
+                    break;
+                case ApplicationViewMode.CompactOverlay:
+                    //
+                    Debug.WriteLine("MainPage_SizeChanged View Mode is ApplicationViewMode.CompactOverlay");
+                    break;
+                default:
+                    //
+                    break;
+            }
 
-            // this computes the current orientation and spanned status
-            QueryOrientation();
-
-            if(GroupedListView.Current.SelectedContact != null)
+            if (GroupedListView.Current.SelectedContact != null)
             {
                 // set the current contact in the display view
                 DisplayView.Current.SetCurrentContact(GroupedListView.Current.SelectedContact);
             }
 
             // if we're spanned and we have a current contact
+            // if the application is spanned, it doesn't matter what the Pane1Length or Pane2Length is
             if (ApplicationIsSpanned && GroupedListView.Current.SelectedContact != null)
             {
                 // set the flag so we know we were spanned
                 applicationWasSpanned = true;
-
-                // set the main view to have Pane1 and Pane2 lengths equal so they span
-                SetMainViewShared();
             }
             else if (!ApplicationIsSpanned && GroupedListView.Current.SelectedContact != null)  // not spanned and have a current contact
             {
@@ -152,112 +163,34 @@ namespace GroupList
             }
         }
 
-        /// <summary>
-        /// We compute the orientation and spanned status of the TwoPaneView here.
-        /// Results update the properties "ApplicationIsSpanned" and "CurrentOrientation"
-        /// </summary>
-        private void QueryOrientation()
-        {
-            // based on initial conditions and current conditions, compute orientation
-            double currentWidth = MainView.ActualWidth;
-            double currentHeight = MainView.ActualHeight;
-
-            // this runs before MainPage_Loaded, when BeginningWidth & BeginningHeight are zero
-            if (BeginningWidth != 0)
-            {
-                if(BackButton.Visibility == Visibility.Collapsed)
-                {
-                    double buttonHeight = BackButton.Height;
-
-                    // if the BackButton is collapsed, take its height into account
-                    if (currentWidth == BeginningWidth && currentHeight == BeginningHeight + buttonHeight)
-                    {
-                        // if width and height are equal to the beginning width & height, we're not spanned
-                        ApplicationIsSpanned = false;
-                    }
-                    else if (currentWidth >= BeginningWidth && currentHeight >= BeginningHeight + buttonHeight)
-                    {
-                        // it is possible that currentWidth AND currentHeight might be equal to 
-                        // their beginning values but that is caught by the clause above.  If only
-                        // one of them is equal, then this clause is executed instead.
-                        ApplicationIsSpanned = true;
-                    }
-                    else
-                    {
-                        ApplicationIsSpanned = false;
-                    }
-                }
-                else
-                {
-                    if (currentWidth == BeginningWidth && currentHeight == BeginningHeight)
-                    {
-                        // if width and height are equal to the beginning width & height, we're not spanned
-                        ApplicationIsSpanned = false;
-                    }
-                    else if (currentWidth >= BeginningWidth && currentHeight >= BeginningHeight)
-                    {
-                        // it is possible that currentWidth AND currentHeight might be equal to 
-                        // their beginning values but that is caught by the clause above.  If only
-                        // one of them is equal, then this clause is executed instead.
-                        ApplicationIsSpanned = true;
-                    }
-                    else
-                    {
-                        ApplicationIsSpanned = false;
-                    }
-                }
-
-
-            }
-            else
-            {
-                // Application always starts as not spanned
-                ApplicationIsSpanned = false;
-            }
-
-            // compute our orientation because we can't rely on DisplayInformation or ApplicationView values
-            if (currentWidth > currentHeight && !ApplicationIsSpanned)
-            {
-                CurrentOrientation = ApplicationViewOrientation.Landscape;
-            }
-            else if (currentWidth < currentHeight && !ApplicationIsSpanned)
-            {
-                CurrentOrientation = ApplicationViewOrientation.Portrait;
-            }
-            else if (ApplicationIsSpanned && currentWidth > currentHeight)
-            {
-                CurrentOrientation = ApplicationViewOrientation.Portrait;
-            }
-            else
-            {
-                CurrentOrientation = ApplicationViewOrientation.Landscape;
-            }
-        }
-
         public void SetMainViewDominant()
         {
-            MainView.Pane1Length = Pane1DominantWidth;
-            MainView.Pane2Length = Pane2DominantWidth;
+            MainView.Pane1Length = OneStarGridLength;
+            MainView.Pane2Length = ZeroStarGridLength;
+            MainView.PanePriority = MUXC.TwoPaneViewPriority.Pane1;
+            MainView.WideModeConfiguration = MUXC.TwoPaneViewWideModeConfiguration.SinglePane;
+            MainView.TallModeConfiguration = MUXC.TwoPaneViewTallModeConfiguration.SinglePane;
             CurrentDominantView = DominantView.Main;
 
             BackButton.IsEnabled = false;
         }
 
-        public void SetMainViewShared()
+        public void SetDualPanes()
         {
-            MainView.Pane1Length = Pane1SharedWidth;
-            MainView.Pane2Length = Pane2SharedWidth;
-            CurrentDominantView = DominantView.Shared;
+            MainView.WideModeConfiguration = MUXC.TwoPaneViewWideModeConfiguration.LeftRight;
+            MainView.TallModeConfiguration = MUXC.TwoPaneViewTallModeConfiguration.TopBottom;
         }
 
         public void SetDisplayViewDominant()
         {
-            MainView.Pane1Length = Pane2DominantWidth;
-            MainView.Pane2Length = Pane1DominantWidth;
+            MainView.Pane1Length = ZeroStarGridLength;
+            MainView.Pane2Length = OneStarGridLength;
+            MainView.PanePriority = MUXC.TwoPaneViewPriority.Pane2;
             CurrentDominantView = DominantView.Display;
+            MainView.WideModeConfiguration = MUXC.TwoPaneViewWideModeConfiguration.LeftRight;
+            MainView.TallModeConfiguration = MUXC.TwoPaneViewTallModeConfiguration.TopBottom;
 
             BackButton.IsEnabled = true;
-
         }
 
         /// <summary>

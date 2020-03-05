@@ -1,16 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Controls.Primitives;
-using Microsoft.UI.Xaml.Media;
+﻿//***********************************************************************
+//
+// Copyright (c) 2020 Microsoft Corporation. All rights reserved.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+// THE SOFTWARE.
+//
+//**********************************************************************​
 using Windows.UI.Xaml.Controls;
 using GroupList.Model;
+using GroupList.GroupList;
+
 // The User Control item template is documented at https://go.microsoft.com/fwlink/?LinkId=234236
 
 namespace GroupList
@@ -34,6 +38,11 @@ namespace GroupList
         public void SetCurrentContact(Contact aContact)
         {
             CurrentContact = aContact;
+
+            if(MainPage.Current.ApplicationIsSpanned)
+            {
+                MainPage.Current.SetDualPanes();
+            }
 
             EditCurrentContact();
         }
@@ -64,15 +73,17 @@ namespace GroupList
             ResetContactForm();
 
             MainPage.Current.SetMainViewDominant();
+
+            GroupedListView.Current.ResetCurrentSelection();
         }
 
         private void ContactSaveButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
             ResetContactForm();
 
-            //Visibility = Windows.UI.Xaml.Visibility.Collapsed;
-
             MainPage.Current.SetMainViewDominant();
+
+            GroupedListView.Current.ResetCurrentSelection();
         }
     }
 }

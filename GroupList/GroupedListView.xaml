@@ -153,9 +153,9 @@
                  You could also use a ListView here.
             -->
             <SemanticZoom.ZoomedOutView>
-                <GridView ItemTemplateSelector="{StaticResource GroupEmptyOrFullSelector}" 
-                          ItemsSource="{x:Bind ContactsCVS.View.CollectionGroups}"  HorizontalAlignment="Center" 
-                          ScrollViewer.VerticalScrollBarVisibility="Disabled" VerticalAlignment="Center"   
+                <GridView x:Name="ZoomedOutGridView" ItemTemplateSelector="{StaticResource GroupEmptyOrFullSelector}" Margin="200,0,0,0"
+                          ItemsSource="{x:Bind ContactsCVS.View.CollectionGroups}"  HorizontalAlignment="Left" 
+                          ScrollViewer.VerticalScrollBarVisibility="Disabled" VerticalAlignment="Top"   
                           Width="340" SelectionMode="None" >
                 </GridView>
             </SemanticZoom.ZoomedOutView>
