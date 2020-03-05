@@ -25,7 +25,7 @@ namespace GroupList.GroupList
 	/// Resource section.  See https://docs.microsoft.com/en-us/uwp/api/Windows.UI.Xaml.Controls.DataTemplateSelector for
 	/// complete details.
 	/// </summary>
-	class GroupEmptyOrFullSelector : DataTemplateSelector
+	public class GroupEmptyOrFullSelector : DataTemplateSelector
     {
         private DataTemplate _full;
         private DataTemplate _empty;
@@ -58,43 +58,46 @@ namespace GroupList.GroupList
 		/// <returns>A DataTemplate object to use when binding.</returns>
         protected override DataTemplate SelectTemplateCore(object item, DependencyObject container)
         {
-			// get the Type of the object calling us
-            var itemType = item.GetType();
-
-			// we only want to execute the logic on GroupInfoList objects
-            var isGroup = itemType.Name == "GroupInfoList";
-            bool isEmpty = false;
-            GroupInfoList groupItem;
-
-			// if we're dealing with a GroupInfoList, evaluate whether or not it has data members
-            if (isGroup)
+            if (null != item)
             {
-                groupItem = item as GroupInfoList;
+                // get the Type of the object calling us
+                var itemType = item.GetType();
 
-				// if a GroupInfoList has no Contact data members, it is Empty.
-                isEmpty = groupItem.Count == 0;
+                // we only want to execute the logic on GroupInfoList objects
+                var isGroup = itemType.Name == "GroupInfoList";
+                bool isEmpty = false;
+                GroupInfoList groupItem;
 
-                // Disable empty items
-                var selectorItem = container as SelectorItem;
-
-				// If a SelectorItem is not null, it contains data members (Contact objects) so we need to enable its 
-				// ability to be selected (clicked) in each Group header of the ZoomedInView,
-				// and on the index to all the groups in the ZoomedOutView of the SemanticZoom control.
-                if (selectorItem != null)
+                // if we're dealing with a GroupInfoList, evaluate whether or not it has data members
+                if (isGroup)
                 {
-                    selectorItem.IsEnabled = !isEmpty;
-                }
+                    groupItem = item as GroupInfoList;
 
-				// return the correct DataTemplate, which was set in our XAML, for this GroupInfoList
-				if (isEmpty)
-                {
-					// the DataTemplate used to display Contact groups with no Contact members
-                    return Empty;
-                }
-                else
-                {
-					// the DataTemplate used to display Contact groups with one or more Contact members
-                    return Full;
+                    // if a GroupInfoList has no Contact data members, it is Empty.
+                    isEmpty = groupItem.Count == 0;
+
+                    // Disable empty items
+                    var selectorItem = container as SelectorItem;
+
+                    // If a SelectorItem is not null, it contains data members (Contact objects) so we need to enable its 
+                    // ability to be selected (clicked) in each Group header of the ZoomedInView,
+                    // and on the index to all the groups in the ZoomedOutView of the SemanticZoom control.
+                    if (selectorItem != null)
+                    {
+                        selectorItem.IsEnabled = !isEmpty;
+                    }
+
+                    // return the correct DataTemplate, which was set in our XAML, for this GroupInfoList
+                    if (isEmpty)
+                    {
+                        // the DataTemplate used to display Contact groups with no Contact members
+                        return Empty;
+                    }
+                    else
+                    {
+                        // the DataTemplate used to display Contact groups with one or more Contact members
+                        return Full;
+                    }
                 }
             }
 
@@ -102,7 +105,6 @@ namespace GroupList.GroupList
 			// any DependencyObject which calls us that is not a SelectorItem, but if we return
 			// null instead, the ZoomedOutView will not work.
             return Full;
-
         }
     }
 }

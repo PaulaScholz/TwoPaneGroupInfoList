@@ -54,7 +54,7 @@ namespace GroupList
 
                 rootFrame.NavigationFailed += OnNavigationFailed;
 
-                if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
+                if (null != e && e.PreviousExecutionState == ApplicationExecutionState.Terminated)
                 {
                     //TODO: Load state from previously suspended application
                 }
@@ -63,7 +63,7 @@ namespace GroupList
                 Window.Current.Content = rootFrame;
             }
 
-            if (e.PrelaunchActivated == false)
+            if (null != e && e.PrelaunchActivated == false)
             {
                 if (rootFrame.Content == null)
                 {

@@ -15,7 +15,6 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using GroupList;
 
 /// <summary>
 /// The Contact class is adapted from the ListView and GridView Microsoft sample and was used here as an excellent source
@@ -35,7 +34,7 @@ namespace GroupList.Model
         {
             get
             {
-                if (initials == string.Empty && FirstName != string.Empty && LastName != string.Empty)
+                if (string.IsNullOrEmpty(initials) && !string.IsNullOrEmpty(FirstName) && !string.IsNullOrEmpty(LastName))
                 {
                     initials = FirstName[0].ToString() + LastName[0].ToString();
                 }
@@ -47,7 +46,7 @@ namespace GroupList.Model
         {
             get
             {
-                if (name == string.Empty && FirstName != string.Empty && LastName != string.Empty)
+                if (string.IsNullOrEmpty(name) && !string.IsNullOrEmpty(FirstName) && !string.IsNullOrEmpty(LastName))
                 {
                     name = FirstName + " " + LastName;
                 }
