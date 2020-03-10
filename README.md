@@ -26,7 +26,7 @@ Lastly, you will need the [Microsoft Emulator with the Windows 10x Emulator Imag
 
 To use the Windows UI library inside your dual-screen application, you must first install it from NuGet.  Right-click on your project file in the Visual Studio Solution Explorer to launch the NuGet tool.
 
-![Manage NuGet Packages](ReadmeImages/TwoPaneNuGet.png)
+![Manage NuGet Packages](ReadmeImages/TwoPaneNuget.png)
 
 Make sure you include the prerelease packages by selecting the checkbox.  You will need version 2.4.0-prerelease.20203002 or better.
 
