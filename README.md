@@ -60,7 +60,23 @@ Then, to use Windows UI Library controls rather than SDK controls, you will need
 
 </Application>
 ```
+## Configuring your Emulator
 
+You may need to configure your Win10x Emulator image.  To do this, launch the `Microsoft Emulator Manager` application from the Start menu. You will see a screen that looks like this:
+
+![Microsoft Emulator](ReadmeImages/EmulatorManager.png)
+
+Once you have started the by pressing the Start button, the emulator image will launch and you will see a Progress Ring as the Win10x image loads.  If the Progress Ring stops and the emulator freezes, you will have to disable the GPU, as some desktop GPUs are not compatible.  To to this, click the Edit button on the Emulator Manager and you will see a screen that looks like this:
+
+![Edit Emulator Device](ReadmeImages/ConfigureEmulator.png)
+
+Simply click the `Disable GPU` checkbox and press the Save button.  Then, restart your emulator image.
+
+Note the IP address of the running emulator image, shown in the Emulator Manager.  You will need this when you configure the debug options for your project in Visual Studio, like this:
+
+![Configure Visual Studio Debugging](ReadmeImages/ConfigureDebug.png)
+
+To get to this screen, simply right-click on your project file in the Visual Studio Solution Explorer and select Properties.  This will launch the project property window.  Select the Debug tab and enter the IP address of your emulator image into the Remote Machine textbox.  Then, in the Authentication Mode drop-down, select `Universal (Unencrypted Protocol)`.  You may then select Remote Machine as your debug target.
 
 
 
