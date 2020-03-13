@@ -78,7 +78,21 @@ Note the IP address of the running emulator image, shown in the Emulator Manager
 
 To get to this screen, simply right-click on your project file in the Visual Studio Solution Explorer and select Properties.  This will launch the project property window.  Select the Debug tab and enter the IP address of your emulator image into the Remote Machine textbox.  Then, in the Authentication Mode drop-down, select `Universal (Unencrypted Protocol)`.  You may then select Remote Machine as your debug target and the application will launch into the emulator when you press F5.
 
+## Visual Studio Solution
 
+The Visual Studio Solution is shown below:
+
+![VisualStudioSolution](ReadmeImages/VisualStudioSolution.png)
+
+`MainPage.xaml` contains the single Page and `TwoPaneView` control and serves as the core of the project.  
+
+Inside each pane are UserControls, one for displaying the generated Contacts list on the `MainView` pane (Pane1), called `GroupedListView`, and another for the Contact edit form, hosted on the `DisplayView` pane (Pane2). These UserControls are implemented in `GroupedListView.xaml` and `DisplayView.xaml`, along with their respective code-behind files.
+
+In the `Contact.cs` file we generate both the Contact list and its respective alphabetical groups used to populate a `CollectionViewSource` object bound to an `ObservableCollection<Contact>` in `GroupedListView`.
+
+In the `GroupList` folder we have two classes used to support the [SemanticZoom](https://docs.microsoft.com/en-us/windows/uwp/design/controls-and-patterns/semantic-zoom) control which provides an index to the alphabetic groups of the Contact list.
+
+## TwoPaneView
 
 
 
