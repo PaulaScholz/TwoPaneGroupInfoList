@@ -54,6 +54,14 @@ namespace GroupList
                 }
         }
 
+        /// <summary>
+        /// Flag to indicate that we were previously spanned.
+        /// </summary>
+        private bool applicationWasSpanned = false;
+
+        /// <summary>
+        /// This is bound in the UI to the back button visibility.
+        /// </summary>
         public bool ApplicationNotSpanned
         {
             get { return !_applicationIsSpanned; }
@@ -63,12 +71,14 @@ namespace GroupList
         public static MainPage Current = null;
 #pragma warning restore CA2211 // Non-constant fields should not be visible
 
+        // These are used to make individual panes visible or not.
         private GridLength OneStarGridLength = new GridLength(1, GridUnitType.Star);
         private GridLength ZeroStarGridLength = new GridLength(0, GridUnitType.Star);
 
+        /// <summary>
+        /// Returns which view (MainView, DisplayView or shared views) is dominant in the display.
+        /// </summary>
         public DominantView CurrentDominantView { get; set; }
-
-        private bool applicationWasSpanned = false;
 
         public MainPage()
         {
@@ -78,9 +88,16 @@ namespace GroupList
 
             MainView.ModeChanged += MainView_ModeChanged;
 
+            // point our static instance variable to the current instance to
+            // give downlevel UserControls access to public members on this page.
             Current = this;
         }
 
+        /// <summary>
+        /// Used for debugging.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
         private void MainView_ModeChanged(MUXC.TwoPaneView sender, object args)
         {
             switch (sender.Mode)
@@ -88,7 +105,6 @@ namespace GroupList
                 case MUXC.TwoPaneViewMode.SinglePane:
                     //
                     Debug.WriteLine("MainView_ModeChanged TwoPaneView Mode is SinglePane");
-
                     break;
                 case MUXC.TwoPaneViewMode.Tall:
                     //
@@ -104,6 +120,12 @@ namespace GroupList
             }
         }
 
+        /// <summary>
+        /// Fired when a rotation or spanning occurs. Dual-Screen experience windows
+        /// are either maximized or minimized, there is no intermediate position.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MainPage_SizeChanged(object sender, SizeChangedEventArgs e)
         {           
            
@@ -158,11 +180,15 @@ namespace GroupList
                 } 
                 else
                 {
+                    // set the DisplayView Contact edit form dominant
                     SetDisplayViewDominant();
                 }
             }
         }
 
+        /// <summary>
+        /// Set us up as single-pane and enable the back button.
+        /// </summary>
         public void SetMainViewDominant()
         {
             MainView.Pane1Length = OneStarGridLength;
@@ -175,12 +201,18 @@ namespace GroupList
             BackButton.IsEnabled = false;
         }
 
+        /// <summary>
+        /// Set up as spanned across screens.
+        /// </summary>
         public void SetDualPanes()
         {
             MainView.WideModeConfiguration = MUXC.TwoPaneViewWideModeConfiguration.LeftRight;
             MainView.TallModeConfiguration = MUXC.TwoPaneViewTallModeConfiguration.TopBottom;
         }
 
+        /// <summary>
+        /// Set the Contact Edit form dominant on a single screen and enable the back button.
+        /// </summary>
         public void SetDisplayViewDominant()
         {
             MainView.Pane1Length = ZeroStarGridLength;
@@ -201,7 +233,6 @@ namespace GroupList
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
             SetMainViewDominant();
-
         }
 
         #region INotifiyPropertyChanged

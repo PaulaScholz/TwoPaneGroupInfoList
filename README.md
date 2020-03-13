@@ -88,7 +88,7 @@ The Visual Studio Solution is shown below:
 
 Inside each pane are UserControls, one for displaying the generated Contacts list on the `MainView` pane (Pane1), called `GroupedListView`, and another for the Contact edit form, hosted on the `DisplayView` pane (Pane2). These UserControls are implemented in `GroupedListView.xaml` and `DisplayView.xaml`, along with their respective code-behind files.
 
-In the `Contact.cs` file we generate both the Contact list and its respective alphabetical groups used to populate a `CollectionViewSource` object bound to an `ObservableCollection<Contact>` in `GroupedListView`.
+In the `Contact.cs` file we generate both the Contact list and its respective alphabetical groups used to populate a `CollectionViewSource` object bound to an `ObservableCollection<GroupInfoList>` in `GroupedListView`.
 
 In the `GroupList` folder we have two classes used to support the [SemanticZoom](https://docs.microsoft.com/en-us/windows/uwp/design/controls-and-patterns/semantic-zoom) control in `GroupedListView` which provides an index to the alphabetic groups of the Contact list.
 
