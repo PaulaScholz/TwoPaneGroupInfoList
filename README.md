@@ -4,7 +4,7 @@
 
 ## Introduction
 
-![TwoPaneGroupInfoList](ReadmeImages/TwoPaneGroupInfoList_small.png)
+![TwoPaneGroupInfoList](ReadmeImages/TwoPaneGroupInfoList.gif)
 
 A Universal Windows Platform sample that illustrates the [TwoPaneView](https://docs.microsoft.com/en-us/windows/uwp/design/controls-and-patterns/two-pane-view) layout control for [Dual-Screen experiences](https://docs.microsoft.com/en-us/dual-screen/introduction), using a randomly-generated Contact list presented in groups with the [SemanticZoom](https://docs.microsoft.com/en-us/windows/uwp/design/controls-and-patterns/semantic-zoom) control.
 
@@ -77,6 +77,8 @@ Note the IP address of the running emulator image, shown in the Emulator Manager
 ![Configure Visual Studio Debugging](ReadmeImages/ConfigureDebug.png)
 
 To get to this screen, simply right-click on your project file in the Visual Studio Solution Explorer and select Properties.  This will launch the project property window.  Select the Debug tab and enter the IP address of your emulator image into the Remote Machine textbox.  Then, in the Authentication Mode drop-down, select `Universal (Unencrypted Protocol)`.  You may then select Remote Machine as your debug target and the application will launch into the emulator when you press F5.
+
+
 
 
 
