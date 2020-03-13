@@ -90,13 +90,62 @@ Inside each pane are UserControls, one for displaying the generated Contacts lis
 
 In the `Contact.cs` file we generate both the Contact list and its respective alphabetical groups used to populate a `CollectionViewSource` object bound to an `ObservableCollection<Contact>` in `GroupedListView`.
 
-In the `GroupList` folder we have two classes used to support the [SemanticZoom](https://docs.microsoft.com/en-us/windows/uwp/design/controls-and-patterns/semantic-zoom) control which provides an index to the alphabetic groups of the Contact list.
+In the `GroupList` folder we have two classes used to support the [SemanticZoom](https://docs.microsoft.com/en-us/windows/uwp/design/controls-and-patterns/semantic-zoom) control in `GroupedListView` which provides an index to the alphabetic groups of the Contact list.
 
 ## TwoPaneView
 
 The primary display layout panel for our application is [TwoPaneView](https://docs.microsoft.com/en-us/windows/uwp/design/controls-and-patterns/two-pane-view). This control provides separate display surfaces for each screen when the application is `spanned` across screens, and when the application is hosted on a single screen, as it does at application launch, its `PanePriority` and `Mode` properties are used to determine which Pane is displayed on the single screen.
 
 ![TwoPaneView Panes](ReadmeImages/TwoPaneShell.png)
+
+The `MainView` Pane1 contains the `GroupedInfoList` UserControl and the `DisplayView` Pane2 contains the Contact edit form UserControl.
+
+`MainPage.xaml` is the single Page in our solution and looks like this:
+
+```xaml
+<Page
+    x:Class="GroupList.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:GroupList.GroupList"
+    xmlns:contact="using:GroupList"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:Microsoft.UI.Xaml.Controls"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <!-- This is the BackButton -->
+        <Button Style="{StaticResource NavigationBackButtonNormalStyle}" x:Name="BackButton" Click="BackButton_Click" 
+                IsEnabled="False" Visibility="{x:Bind ApplicationNotSpanned, Mode=OneWay}"/>
+        
+        <!-- TwoPaneView allows screen spanning and display of panes under software control.  Here, we use UserControls
+              to host the actual content of the panes.    -->
+        <controls:TwoPaneView x:Name="MainView"
+                 Grid.Row="1"
+                 Pane1Length="1*"
+                 Pane2Length="0*"
+                 PanePriority="Pane1"
+                 MinTallModeHeight="641"
+                 MinWideModeWidth="641"
+                 TallModeConfiguration="TopBottom"
+                 WideModeConfiguration="LeftRight">
+            <controls:TwoPaneView.Pane1>
+                <local:GroupedListView />
+            </controls:TwoPaneView.Pane1>
+            <controls:TwoPaneView.Pane2>
+                <contact:DisplayView />
+            </controls:TwoPaneView.Pane2>
+        </controls:TwoPaneView>
+    </Grid>
+</Page>
+```
 
 
 
