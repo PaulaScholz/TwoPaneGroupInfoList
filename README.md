@@ -10,7 +10,7 @@ A Universal Windows Platform sample that illustrates the [TwoPaneView](https://d
 
 [TwoPaneView](https://docs.microsoft.com/en-us/windows/uwp/design/controls-and-patterns/two-pane-view) provides two distinct areas of content that can be spanned onto separate screens on dual-screen devices like the [Surface Neo](https://www.microsoft.com/en-us/surface/devices/surface-neo?&OCID=AID2000022_SEM_oCeJqLSf&msclkid=41672d2d892e1554df52734a51ae580b). `TwoPaneView` is the primary layout panel used to support dual-screen development for UWP applications.
 
-While `TwoPaneView` is part of the Windows SDK, Microsoft recommends you use the version inside the [Windows UI](https://docs.microsoft.com/en-us/uwp/toolkits/winui/) library, which provides updated versions of existing Windows platform controls.
+While `TwoPaneView` is part of the Windows SDK, Microsoft recommends you use the version inside the [Windows UI](https://microsoft.github.io/microsoft-ui-xaml/) library, which provides updated versions of existing Windows platform controls.
 
 ## System Requirements
 
@@ -24,7 +24,7 @@ Lastly, you will need the [Microsoft Emulator with the Windows 10x Emulator Imag
 
 ## Using the Windows UI Library
 
-To use the Windows UI library inside your dual-screen application, you must first install it from NuGet.  Right-click on your project file in the Visual Studio Solution Explorer to launch the NuGet tool.
+To use the [Windows UI library](https://microsoft.github.io/microsoft-ui-xaml/) inside your dual-screen application, you must first install it from NuGet.  Right-click on your project file in the Visual Studio Solution Explorer to launch the NuGet tool.
 
 ![Manage NuGet Packages](ReadmeImages/TwoPaneNuget.png)
 
