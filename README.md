@@ -228,7 +228,7 @@ Then, if we have a currently selected contact in the `GroupedListView`, we call 
 
 ```csharp
         /// <summary>
-        /// Set us up as single-pane and enable the back button.
+        /// Set us up as single-pane and disable the back button.
         /// </summary>
         public void SetMainViewDominant()
         {
