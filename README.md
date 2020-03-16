@@ -226,6 +226,59 @@ There is no way to query the actual application spanned status, instead we know 
 
 Then, if we have a currently selected contact in the `GroupedListView`, we call the `DisplayView.Current.SetCurrentContact` method, which will change the `TwoPaneView.WideModeConfiguration` and `TwoPaneView.TallModeConfiguration` to `LeftRight` and `TopBotton`, by calling `MainPage.SetDualPanes()` through the static `Current` instance variable.
 
+```csharp
+        /// <summary>
+        /// Set us up as single-pane and enable the back button.
+        /// </summary>
+        public void SetMainViewDominant()
+        {
+            MainView.Pane1Length = OneStarGridLength;
+            MainView.Pane2Length = ZeroStarGridLength;
+            MainView.PanePriority = MUXC.TwoPaneViewPriority.Pane1;
+            MainView.WideModeConfiguration = MUXC.TwoPaneViewWideModeConfiguration.SinglePane;
+            MainView.TallModeConfiguration = MUXC.TwoPaneViewTallModeConfiguration.SinglePane;
+            CurrentDominantView = DominantView.Main;
+
+            BackButton.IsEnabled = false;
+        }
+
+        /// <summary>
+        /// Set up as spanned across screens.
+        /// </summary>
+        public void SetDualPanes()
+        {
+            MainView.WideModeConfiguration = MUXC.TwoPaneViewWideModeConfiguration.LeftRight;
+            MainView.TallModeConfiguration = MUXC.TwoPaneViewTallModeConfiguration.TopBottom;
+        }
+
+        /// <summary>
+        /// Set the Contact Edit form dominant on a single screen and enable the back button.
+        /// </summary>
+        public void SetDisplayViewDominant()
+        {
+            MainView.Pane1Length = ZeroStarGridLength;
+            MainView.Pane2Length = OneStarGridLength;
+            MainView.PanePriority = MUXC.TwoPaneViewPriority.Pane2;
+            CurrentDominantView = DominantView.Display;
+            MainView.WideModeConfiguration = MUXC.TwoPaneViewWideModeConfiguration.LeftRight;
+            MainView.TallModeConfiguration = MUXC.TwoPaneViewTallModeConfiguration.TopBottom;
+
+            BackButton.IsEnabled = true;
+        }
+
+        /// <summary>
+        /// User pressed the BackButton, so change the dominant pane to the contact list.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+            SetMainViewDominant();
+        }
+```
+If our application is in a Spanned state, we want to display both panes.  If we have a current contact, the Contact edit form will be displayed in Pane 2 on `DisplayView.xmal` and if we do not, then the `GridView` containing the Contact list will be displayed on both panes and both the `WideModeConfiguration` and `TallModeConfiguration` of the `MainView` will be set to a `SinglePane` configuration.
+
+
 
 
 
