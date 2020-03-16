@@ -150,6 +150,88 @@ This Xaml sets up a two-row `Grid`.  The first row contains a navigation back bu
 
 Note that each pane of the `TwoPaneView` is populated solely by a `UserControl`.  In Pane1, we have the `GroupedListView` used to create and display `Contact` objects in a `GridView`, and in Pane2 we have a Contact edit form used to display and edit individual Contact records.  Contact changes are not persisted to the Contact list as this is beyond the scope of the sample and the Contacts are generated randomly each time the application runs.
 
+We need to handle several application states inside `MainPage.xaml.cs` to reflect orientation changes and respond to user events.  These take place in the `MainPage_SizedChanged` event handler, which is fired when rotation or application spanning occurs.  Let's examine this method:
+
+```csharp
+        /// <summary>
+        /// Fired when a rotation or spanning occurs. Dual-Screen experience windows
+        /// are either maximized or minimized, there is no intermediate position.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MainPage_SizeChanged(object sender, SizeChangedEventArgs e)
+        {           
+           
+            switch(ApplicationView.GetForCurrentView().ViewMode)
+            {
+                case ApplicationViewMode.Spanning:
+                    //
+                    Debug.WriteLine("MainPage_SizeChanged View Mode is ApplicationViewMode.Spanning");
+                    ApplicationIsSpanned = !ApplicationIsSpanned;
+                    break;
+                case ApplicationViewMode.Default:
+                    //
+                    Debug.WriteLine("MainPage_SizeChanged View Mode is ApplicationViewMode.Default");
+                    ApplicationIsSpanned = false;
+                    break;
+                case ApplicationViewMode.CompactOverlay:
+                    //
+                    Debug.WriteLine("MainPage_SizeChanged View Mode is ApplicationViewMode.CompactOverlay");
+                    break;
+                default:
+                    //
+                    break;
+            }
+
+            if (GroupedListView.Current.SelectedContact != null)
+            {
+                // set the current contact in the display view
+                DisplayView.Current.SetCurrentContact(GroupedListView.Current.SelectedContact);
+            }
+
+            // if we're spanned and we have a current contact
+            // if the application is spanned, it doesn't matter what the Pane1Length or Pane2Length is
+            if (ApplicationIsSpanned && GroupedListView.Current.SelectedContact != null)
+            {
+                // set the flag so we know we were spanned
+                applicationWasSpanned = true;
+            }
+            else if (!ApplicationIsSpanned && GroupedListView.Current.SelectedContact != null)  // not spanned and have a current contact
+            {
+                // if we were spanned and are now not
+                if(applicationWasSpanned)
+                {
+                    // We want to see the DisplayView dominant
+                    SetDisplayViewDominant();
+
+                    applicationWasSpanned = false;
+                }
+                else if (CurrentDominantView == DominantView.Main)
+                {
+                    // if we weren't spanned, and still are not, set GroupInfoList dominant
+                    SetMainViewDominant();
+                } 
+                else
+                {
+                    // set the DisplayView Contact edit form dominant
+                    SetDisplayViewDominant();
+                }
+            }
+        }
+        
+```
+The first thing is to check the spanned status of the application.  We do this by examing the `ApplicationViewMode` value of the current`ApplicationView`. Note that you need to be using the preview `WinUI` library to have the `Spanning` enum value.
+
+There is no way to query the actual application spanned status, instead we know the application starts in an unspanned default mode and we keep track of changes through our `ApplicationIsSpanned` boolean property each time `MainPage_SizeChanged` is fired.
+
+Then, if we have a currently selected contact in the `GroupedListView`, we call the `DisplayView.Current.SetCurrentContact` method, which will change the `TwoPaneView.WideModeConfiguration` and `TwoPaneView.TallModeConfiguration` to `LeftRight` and `TopBotton`, by calling `MainPage.SetDualPanes()` through the static `Current` instance variable.
+
+
+
+
+
+
+
 
 
 
