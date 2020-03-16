@@ -280,9 +280,12 @@ If our application is in a Spanned state, we want to display both panes.  If we 
 
 ## GroupedInfoList and SemanticZoom
 
-The Contact list created in GroupInfoList is assigned to a [CollectionViewSource](https://docs.microsoft.com/en-us/uwp/api/Windows.UI.Xaml.Data.CollectionViewSource) that provides grouping and current-item support to its assigned `ObservableCollection`.  
+The Contact list created in GroupInfoList is assigned to a [CollectionViewSource](https://docs.microsoft.com/en-us/uwp/api/Windows.UI.Xaml.Data.CollectionViewSource) that provides grouping and current-item support to its assigned `ObservableCollection<GroupInfoList>`.  
 
 Inside the `Documentation` folder of this repository, you will find a `semanticzoom_web.htm` file that provides a comprehensive explanation of the `Contact`, `GroupInfoList`, `EmptyOrFullSelector` and `GroupedListView` classes.  You may also view this [documentation](https://swifter.github.io/GroupInfoList/semanticzoom_web.htm) online at my personal GitHub repository.
+
+Paula Scholz
+March 16, 2020
 
 
 
