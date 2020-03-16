@@ -278,8 +278,11 @@ Then, if we have a currently selected contact in the `GroupedListView`, we call 
 ```
 If our application is in a Spanned state, we want to display both panes.  If we have a current contact, the Contact edit form will be displayed in Pane 2 on `DisplayView.xmal` and if we do not, then the `GridView` containing the Contact list will be displayed on both panes and both the `WideModeConfiguration` and `TallModeConfiguration` of the `MainView` will be set to a `SinglePane` configuration.
 
+## GroupedInfoList and SemanticZoom
 
+The Contact list created in GroupInfoList is assigned to a [CollectionViewSource](https://docs.microsoft.com/en-us/uwp/api/Windows.UI.Xaml.Data.CollectionViewSource) that provides grouping and current-item support to its assigned `ObservableCollection`.  
 
+Inside the `Documentation` folder of this repository, you will find a `semanticzoom_web.htm` file that provides a comprehensive explanation of the `Contact`, `GroupInfoList`, `EmptyOrFullSelector` and `GroupedListView` classes.  You may also view this [documentation](https://swifter.github.io/GroupInfoList/semanticzoom_web.htm) online at my personal GitHub repository.
 
 
 
