@@ -146,7 +146,9 @@ The `MainView` Pane1 contains the `GroupedInfoList` UserControl and the `Display
     </Grid>
 </Page>
 ```
+This Xaml sets up a two-row `Grid`.  The first row contains a navigation back button, active when Pane 2 (DisplayView) is the dominant pane and the display is not spanned (single-screen).  The second row contains our [TwoPaneView](https://docs.microsoft.com/en-us/uwp/api/microsoft.ui.xaml.controls.twopaneview?view=winui-2.4) control.
 
+Note that each pane of the `TwoPaneView` is populated solely by a `UserControl`.  In Pane1, we have the `GroupedListView` used to create and display `Contact` objects in a `GridView`, and in Pane2 we have a Contact edit form used to display and edit individual Contact records.  Contact changes are not persisted to the Contact list as this is beyond the scope of the sample and the Contacts are generated randomly each time the application runs.
 
 
 
