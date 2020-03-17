@@ -26,40 +26,13 @@ Lastly, you will need the [Microsoft Emulator with the Windows 10x Emulator Imag
 
 To use the [Windows UI library](https://microsoft.github.io/microsoft-ui-xaml/) inside your dual-screen application, you must first install it from NuGet.  Right-click on your project file in the Visual Studio Solution Explorer to launch the NuGet tool.
 
-![Manage NuGet Packages](ReadmeImages/TwoPaneNuget.png)
+Make sure you include the prerelease packages by selecting the checkbox.  You will need version `2.4.0-prerelease.20203002` or better.
 
-Make sure you include the prerelease packages by selecting the checkbox.  You will need version 2.4.0-prerelease.20203002 or better.
+Then, to use Windows UI Library controls rather than SDK controls, you will need to place a XamlControlsResources reference in your `App.xaml` Resource Dictionary.
 
-![Prerelease NuGet Packages](ReadmeImages/TwoPaneNuGetBrowse.png)
+For more detail, please refer to the [Getting started with the Windows UI Library](https://docs.microsoft.com/en-us/uwp/toolkits/winui/getting-started) guide.
 
-Then, to use Windows UI Library controls rather than SDK controls, you will need to place a XamlControlsResources reference in your `App.xaml` Resource Dictionary, like this:
 
-```xaml
-<Application
-    x:Class="GroupList.App"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:GroupList"
-    RequestedTheme="Dark">
-
-    <!-- To use WinUI controls rather than SDK controls, you have to place a XamlControlsResources
-         reference in your Resource Dictionary.  -->
-    <Application.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
-                <ResourceDictionary Source="/Styles/_Colors.xaml"/>
-                <ResourceDictionary Source="/Styles/_FontSizes.xaml"/>
-                <ResourceDictionary Source="/Styles/_Thickness.xaml"/>
-                <ResourceDictionary Source="/Styles/Irene.xaml" />
-                <ResourceDictionary Source="/Styles/TextBlock.xaml"/>
-                <ResourceDictionary Source="/Styles/Page.xaml"/>
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-    </Application.Resources>
-
-</Application>
-```
 ## Configuring your Emulator
 
 You may need to configure your Win10x Emulator image.  To do this, launch the `Microsoft Emulator Manager` application from the Start menu. You will see a screen that looks like this:
