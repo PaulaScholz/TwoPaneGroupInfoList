@@ -284,8 +284,8 @@ The Contact list created in GroupInfoList is assigned to a [CollectionViewSource
 
 Inside the `Documentation` folder of this repository, you will find a `semanticzoom_web.htm` file that provides a comprehensive explanation of the `Contact`, `GroupInfoList`, `EmptyOrFullSelector` and `GroupedListView` classes.  You may also view this [documentation](https://swifter.github.io/GroupInfoList/semanticzoom_web.htm) online at my personal GitHub repository.
 
-Paula Scholz
-March 16, 2020
+Paula Scholz<br>
+March 16, 2020<br>
 Windows Developer Incubation and Learning
 
 
