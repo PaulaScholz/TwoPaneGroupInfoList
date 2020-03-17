@@ -66,7 +66,7 @@ You may need to configure your Win10x Emulator image.  To do this, launch the `M
 
 ![Microsoft Emulator](ReadmeImages/EmulatorManager.png)
 
-Once you have started the emulator image by pressing the Start button, the emulator will launch and you will see a Progress Ring as the Win10x OS image loads.  If the Progress Ring stops and the emulator freezes, you will have to disable the GPU, as some desktop GPUs are not compatible with the emulator.  To to this, click the Edit button on the image entry in the Emulator Manager and you will see a screen that looks like this:
+Once you have started the emulator image by pressing the Start button, the emulator will launch and you will see a Progress Ring as the Win10x OS image loads.  If the Progress Ring stops and the emulator freezes, you will have to disable the GPU, as some desktop GPUs are not compatible with the emulator.  To do this, click the Edit button on the image entry in the Emulator Manager and you will see a screen that looks like this:
 
 ![Edit Emulator Device](ReadmeImages/ConfigureEmulator.png)
 
@@ -94,7 +94,7 @@ In the `GroupList` folder we have two classes used to support the [SemanticZoom]
 
 ## TwoPaneView
 
-The primary display layout panel for our application is [TwoPaneView](https://docs.microsoft.com/en-us/windows/uwp/design/controls-and-patterns/two-pane-view). This control provides separate display surfaces for each screen when the application is `spanned` across screens, and when the application is hosted on a single screen, as it does at application launch, its `PanePriority` and `Mode` properties are used to determine which Pane is displayed on the single screen.
+The primary display layout panel for our application is [TwoPaneView](https://docs.microsoft.com/en-us/windows/uwp/design/controls-and-patterns/two-pane-view). This control provides separate display surfaces for each screen when the application is `spanned` across screens, and when the application is hosted on a single screen as it does at application launch, its `PanePriority` and `Mode` properties are used to determine which Pane is displayed on the single screen.
 
 ![TwoPaneView Panes](ReadmeImages/TwoPaneShell.png)
 
@@ -148,7 +148,7 @@ The `MainView` Pane1 contains the `GroupedInfoList` UserControl and the `Display
 ```
 This Xaml sets up a two-row `Grid`.  The first row contains a navigation back button, active when Pane 2 (DisplayView) is the dominant pane and the display is not spanned (single-screen).  The second row contains our [TwoPaneView](https://docs.microsoft.com/en-us/uwp/api/microsoft.ui.xaml.controls.twopaneview?view=winui-2.4) control.
 
-Note that each pane of the `TwoPaneView` is populated solely by a `UserControl`.  In Pane1, we have the `GroupedListView` used to create and display `Contact` objects in a `GridView`, and in Pane2 we have a Contact edit form used to display and edit individual Contact records.  Contact changes are not persisted to the Contact list as this is beyond the scope of the sample and the Contacts are generated randomly each time the application runs.
+Note that each pane of the `TwoPaneView` is populated solely by a `UserControl`.  In Pane1, we have the `GroupedListView` used to create and display `Contact` objects in a `GridView`, and in Pane2 we have a Contact edit form used to display and edit individual Contact records.  Contact changes are not persisted to the Contact list as this is beyond the scope of the sample.  Contacts are generated randomly each time the application runs.
 
 We need to handle several application states inside `MainPage.xaml.cs` to reflect orientation changes and respond to user events.  These take place in the `MainPage_SizedChanged` event handler, which is fired when rotation or application spanning occurs.  Let's examine this method:
 
@@ -220,9 +220,9 @@ We need to handle several application states inside `MainPage.xaml.cs` to reflec
         }
         
 ```
-The first thing is to check the spanned status of the application.  We do this by examing the `ApplicationViewMode` value of the current`ApplicationView`. Note that you need to be using the preview `WinUI` library to have the `Spanning` enum value.
+The switch statement determines the spanned status of the application.  We do this by examing the `ApplicationViewMode` value of the current`ApplicationView`. Note that you need to be using the preview `WinUI` library to have the `Spanning` enum value.
 
-There is no way to query the actual application spanned status, instead we know the application starts in an unspanned default mode and we keep track of changes through our `ApplicationIsSpanned` boolean property each time `MainPage_SizeChanged` is fired.
+There is no way to query the actual application spanned status. Instead we know the application starts in an unspanned default mode and we keep track of changes through our `ApplicationIsSpanned` boolean property each time `MainPage_SizeChanged` is fired.
 
 Then, if we have a currently selected contact in the `GroupedListView`, we call the `DisplayView.Current.SetCurrentContact` method, which will change the `TwoPaneView.WideModeConfiguration` and `TwoPaneView.TallModeConfiguration` to `LeftRight` and `TopBotton`, by calling `MainPage.SetDualPanes()` through the static `Current` instance variable.
 
@@ -286,6 +286,7 @@ Inside the `Documentation` folder of this repository, you will find a `semanticz
 
 Paula Scholz
 March 16, 2020
+Windows Developer Incubation and Learning
 
 
 
