@@ -15,7 +15,7 @@ While `TwoPaneView` is part of the Windows SDK, Microsoft recommends you use the
 ## System Requirements
 
 At the time of writing (March, 2020), development for dual-screen experiences requires
-[Windows 10 version 10.0.18362](https://docs.microsoft.com/en-us/windows/uwp/whats-new/windows-10-build-18362) or better, and its companion [Windows SDK](https://developer.microsoft.com/en-US/windows/downloads/windows-10-sdk/).  You also need [Windows UI](https://microsoft.github.io/microsoft-ui-xaml/) `version 2.4.0-prerelease-200203002` or better, available for installation through NuGet.
+[Windows 10 version 10.0.18362](https://docs.microsoft.com/en-us/windows/uwp/whats-new/windows-10-build-18362) or better, along with its companion [Windows SDK](https://developer.microsoft.com/en-US/windows/downloads/windows-10-sdk/).  You also need [Windows UI](https://microsoft.github.io/microsoft-ui-xaml/) `version 2.4.0-prerelease-200203002` or better, available for installation through NuGet.
 
 ## Development Tools
 
@@ -33,7 +33,7 @@ Make sure you include the prerelease packages by selecting the checkbox.  You wi
 
 Then, to use Windows UI Library controls rather than SDK controls, you will need to place a XamlControlsResources reference in your `App.xaml` Resource Dictionary.
 
-For more detail, please refer to the [Getting started with the Windows UI Library](https://docs.microsoft.com/en-us/uwp/toolkits/winui/getting-started) guide.
+For more details, please refer to the [Getting started with the Windows UI Library](https://docs.microsoft.com/en-us/uwp/toolkits/winui/getting-started) guide.
 
 
 ## Configuring your Emulator
@@ -42,7 +42,7 @@ You may need to configure your Win10x Emulator image.  Please refer to the [rele
 
 
 ## Debugging
-You should also follow this [guidance](https://docs.microsoft.com/en-us/dual-screen/windows/use-emulator#visual-studio-2019-preview) for debugging your Windows 10x UWP dual-screen apps.  Win32 applications will need to follow [this procedure.](https://docs.microsoft.com/en-us/dual-screen/windows/use-emulator#debug-win32-apps)
+You should also follow this [guidance](https://docs.microsoft.com/en-us/dual-screen/windows/use-emulator#visual-studio-2019-preview) for debugging your Windows 10x UWP dual-screen apps.  
 
 ## Visual Studio Solution
 
