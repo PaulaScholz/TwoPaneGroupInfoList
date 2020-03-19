@@ -38,11 +38,11 @@ For more details, please refer to the [Getting started with the Windows UI Libra
 
 ## Configuring your Emulator
 
-You may need to configure your Win10x Emulator image.  Please refer to the [release notes](https://docs.microsoft.com/en-us/dual-screen/windows/release-notes#emulator-app) for the `Windows 10x development tools`.
+You may need to configure your Win10x Emulator image.  Please refer to the [release notes](https://docs.microsoft.com/en-us/dual-screen/windows/release-notes#emulator-app) for the Windows 10x development tools.
 
 
 ## Debugging
-You should also follow this [guidance](https://docs.microsoft.com/en-us/dual-screen/windows/use-emulator#visual-studio-2019-preview) for debugging your Windows 10x UWP dual-screen apps.  
+You should follow this [guidance](https://docs.microsoft.com/en-us/dual-screen/windows/use-emulator#visual-studio-2019-preview) for debugging your Windows 10x UWP dual-screen apps.  
 
 ## Visual Studio Solution
 
