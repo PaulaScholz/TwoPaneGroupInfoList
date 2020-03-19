@@ -14,13 +14,16 @@ While `TwoPaneView` is part of the Windows SDK, Microsoft recommends you use the
 
 ## System Requirements
 
-At the time of writing (March, 2020), development for dual-screen experiences requires a [Windows Insider Preview Build](https://docs.microsoft.com/en-us/windows-insider/at-home/get-started). This demo uses [Windows 10 Insider Preview Build 19559](https://blogs.windows.com/windowsexperience/2020/02/05/announcing-windows-10-insider-preview-build-19559/), its companion `Windows SDK`, and `Windows UI` version 2.4.0-prerelease-200203002 or better, available for installation through NuGet. Check on the [Windows Insider Flight Hub](https://docs.microsoft.com/en-us/windows-insider/flight-hub/) for the latest OS and SDK downloads. You must be a member of the [Windows Insider Program](https://insider.windows.com/en-us/) to obtain access to these assets.
+At the time of writing (March, 2020), development for dual-screen experiences requires
+[Windows 10 version 10.0.18362](https://docs.microsoft.com/en-us/windows/uwp/whats-new/windows-10-build-18362) or better, and its companion [Windows SDK](https://developer.microsoft.com/en-US/windows/downloads/windows-10-sdk/).  You also need [Windows UI](https://microsoft.github.io/microsoft-ui-xaml/) `version 2.4.0-prerelease-200203002` or better, available for installation through NuGet.
 
 ## Development Tools
 
-You will need the latest [Visual Studio 2019 Preview](https://visualstudio.microsoft.com/vs/preview/), which can run right alongside your existing Visual Studio installations. This sample was built with Visual Studio 2019 Preview 5.
+Please refer to the [Windows 10x development tools](https://docs.microsoft.com/en-us/dual-screen/windows/get-dev-tools) guide.
 
-Lastly, you will need the [Microsoft Emulator with the Windows 10x Emulator Image Preview](https://docs.microsoft.com/en-us/dual-screen/windows/get-dev-tools) from the Microsoft Store, so that you may run this sample without an actual dual-screen device. These tools must be installed on a Windows Insider OS build, along with the appropiate Windows SDK. 
+You will need the latest version of [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/). This sample was built with Visual Studio 2019 16.5.
+
+You will also need the [Microsoft Emulator with the Windows 10x Emulator Image](https://blogs.windows.com/windowsdeveloper/2020/03/10/microsoft-emulator-and-windows-10x-emulator-image-preview-build-19578-available-now/) from the Microsoft Store, so that you may run this sample without an actual dual-screen device. 
 
 ## Using the Windows UI Library
 
@@ -35,21 +38,11 @@ For more detail, please refer to the [Getting started with the Windows UI Librar
 
 ## Configuring your Emulator
 
-You may need to configure your Win10x Emulator image.  To do this, launch the `Microsoft Emulator Manager` application from the Start menu. You will see a screen that looks like this:
+You may need to configure your Win10x Emulator image.  Please refer to the [release notes](https://docs.microsoft.com/en-us/dual-screen/windows/release-notes#emulator-app) for the `Windows 10x development tools`.
 
-![Microsoft Emulator](ReadmeImages/EmulatorManager.png)
 
-Once you have started the emulator image by pressing the Start button, the emulator will launch and you will see a Progress Ring as the Win10x OS image loads.  If the Progress Ring stops and the emulator freezes, you will have to disable the GPU, as some desktop GPUs are not compatible with the emulator.  To do this, click the Edit button on the image entry in the Emulator Manager and you will see a screen that looks like this:
-
-![Edit Emulator Device](ReadmeImages/ConfigureEmulator.png)
-
-Simply click the `Disable GPU` checkbox and press the Save button.  Then, restart your emulator image.
-
-Note the IP address of the running emulator image, shown in the Emulator Manager.  You will need this when you configure the debug options for your project in Visual Studio, like this:
-
-![Configure Visual Studio Debugging](ReadmeImages/ConfigureDebug.png)
-
-To get to this screen, simply right-click on your project file in the Visual Studio Solution Explorer and select Properties.  This will launch the project property window.  Select the Debug tab and enter the IP address of your emulator image into the Remote Machine textbox.  Then, in the Authentication Mode drop-down, select `Universal (Unencrypted Protocol)`.  You may then select Remote Machine as your debug target and the application will launch into the emulator when you press F5.
+## Debugging
+You should also follow this [guidance](https://docs.microsoft.com/en-us/dual-screen/windows/use-emulator#visual-studio-2019-preview) for debugging your Windows 10x UWP dual-screen apps.  Win32 applications will need to follow [this procedure.](https://docs.microsoft.com/en-us/dual-screen/windows/use-emulator#debug-win32-apps)
 
 ## Visual Studio Solution
 
