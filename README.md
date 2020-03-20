@@ -25,6 +25,8 @@ You will need the latest version of [Visual Studio 2019](https://visualstudio.mi
 
 You will also need the [Microsoft Emulator with the Windows 10x Emulator Image](https://blogs.windows.com/windowsdeveloper/2020/03/10/microsoft-emulator-and-windows-10x-emulator-image-preview-build-19578-available-now/) from the Microsoft Store, so that you may run this sample without an actual dual-screen device. 
 
+The sample may also be run on desktop `Windows version 10.0.18362` or better without an emulator. In this case, it will appear as if on a single screen device.
+
 ## Using the Windows UI Library
 
 To use the [Windows UI library](https://microsoft.github.io/microsoft-ui-xaml/) inside your dual-screen application, you must first install it from NuGet.  Right-click on your project file in the Visual Studio Solution Explorer to launch the NuGet tool.
