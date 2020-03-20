@@ -62,7 +62,7 @@ In the `GroupList` folder we have two classes used to support the [SemanticZoom]
 
 ## TwoPaneView
 
-The primary display layout panel for our application is [TwoPaneView](https://docs.microsoft.com/en-us/windows/uwp/design/controls-and-patterns/two-pane-view). This control provides separate display surfaces for each screen when the application is `spanned` across screens, and when the application is hosted on a single screen as it does at application launch, its `PanePriority` and `Mode` properties are used to determine which Pane is displayed on the single screen.
+The primary display layout panel for our application is [TwoPaneView](https://docs.microsoft.com/en-us/windows/uwp/design/controls-and-patterns/two-pane-view). This control provides separate display surfaces for each screen when the application is `spanned` across screens, and when the application is hosted on a single screen as it does at application launch, its `PanePriority`, `TallModeConfiguration` and `WideModeConfiguration` properties are used to determine which Pane is displayed on the single screen.
 
 ![TwoPaneView Panes](ReadmeImages/TwoPaneShell.png)
 
