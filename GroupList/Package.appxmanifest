@@ -8,8 +8,8 @@
 
   <Identity
     Name="729a39be-d6bb-4cae-95b5-707509381c38"
-    Publisher="CN=paulascholz"
-    Version="1.0.0.0" />
+    Publisher="CN=v-pauls"
+    Version="1.0.5.0" />
 
   <mp:PhoneIdentity PhoneProductId="729a39be-d6bb-4cae-95b5-707509381c38" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
@@ -32,12 +32,12 @@
       Executable="$targetnametoken$.exe"
       EntryPoint="GroupList.App">
       <uap:VisualElements
-        DisplayName="GroupList"
+        DisplayName="TwoPaneGroupInfoList"
         Square150x150Logo="Assets\Square150x150Logo.png"
         Square44x44Logo="Assets\Square44x44Logo.png"
-        Description="GroupList"
+        Description="Dual Screen Group List with Semantic Zoom"
         BackgroundColor="transparent">
-        <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png"/>
+        <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" Square71x71Logo="Assets\SmallTile.png" Square310x310Logo="Assets\LargeTile.png"/>
         <uap:SplashScreen Image="Assets\SplashScreen.png" />
       </uap:VisualElements>
     </Application>
